@@ -1,0 +1,139 @@
+@import "tailwindcss";
+
+:root {
+  /* ---- Brand palette ---- */
+  --space-indigo: #1b264f;
+  --french-blue: #274690;
+  --sky-aqua: #72ddf7;
+  --white: #ffffff;
+
+  /* derived surfaces */
+  --indigo-deep: #131c3d;
+  --indigo-soft: #243463;
+  --aqua-tint: #eafcff;
+  --ink: #0f1530;
+  --slate: #5b6688;
+
+  --background: var(--white);
+  --foreground: var(--ink);
+
+  /* Display: Space Grotesk via next/font, falls back to system geometric sans */
+  --font-display: var(--font-space-grotesk), "Avenir Next", "Segoe UI",
+    ui-sans-serif, system-ui, sans-serif;
+  /* Body: Inter via next/font, falls back to system humanist sans */
+  --font-body: var(--font-inter), -apple-system, BlinkMacSystemFont,
+    "Segoe UI", Roboto, ui-sans-serif, sans-serif;
+  /* Mono: JetBrains Mono via next/font, falls back to system mono */
+  --font-mono: var(--font-jetbrains-mono), "SF Mono", "Cascadia Code",
+    ui-monospace, Menlo, Consolas, monospace;
+}
+
+@theme inline {
+  --color-space-indigo: var(--space-indigo);
+  --color-indigo-deep: var(--indigo-deep);
+  --color-indigo-soft: var(--indigo-soft);
+  --color-french-blue: var(--french-blue);
+  --color-sky-aqua: var(--sky-aqua);
+  --color-aqua-tint: var(--aqua-tint);
+  --color-ink: var(--ink);
+  --color-slate: var(--slate);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+
+  --font-display: var(--font-display);
+  --font-body: var(--font-body);
+  --font-mono: var(--font-mono);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-body);
+}
+
+::selection {
+  background: var(--sky-aqua);
+  color: var(--space-indigo);
+}
+
+/* Visible keyboard focus everywhere */
+:focus-visible {
+  outline: 2px solid var(--sky-aqua);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* ---------- Perforated ticket-stub divider (signature element) ---------- */
+.perforation {
+  position: relative;
+}
+.perforation::before {
+  content: "";
+  position: absolute;
+  top: -1px;
+  bottom: -1px;
+  left: 0;
+  width: 0;
+  border-left: 2px dashed rgba(27, 38, 79, 0.18);
+}
+.notch {
+  position: absolute;
+  width: 22px;
+  height: 22px;
+  border-radius: 9999px;
+  background: var(--background);
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 5;
+}
+.notch-top {
+  top: -11px;
+}
+.notch-bottom {
+  bottom: -11px;
+}
+
+/* ---------- Rise-up entrance ---------- */
+@keyframes rise-up {
+  from {
+    opacity: 0;
+    transform: translateY(28px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.animate-rise {
+  animation: rise-up 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-rise {
+    animation: none;
+  }
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+/* subtle grain / glow backdrop used on hero */
+.bg-grid {
+  background-image:
+    radial-gradient(circle at 18% 12%, rgba(114, 221, 247, 0.16), transparent 38%),
+    radial-gradient(circle at 84% 0%, rgba(39, 70, 144, 0.35), transparent 45%),
+    linear-gradient(180deg, var(--space-indigo) 0%, var(--indigo-deep) 100%);
+}
+
+.tabular {
+  font-variant-numeric: tabular-nums;
+}
